@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+<title>Sabrina Navy Chhuoy</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=AbrilFatface">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/forms.css">
+
+  <script type="text/javascript">
+    // <![CDATA[
+    var colour="#a800ff";
+    var sparkles=120;
+    
+    /****************************
+    *  Tinkerbell Magic Sparkle *
+    * (c) 2005 mf2fm web-design *
+    *  http://www.mf2fm.com/rv  *
+    * DON'T EDIT BELOW THIS BOX *
+    ****************************/
+    var x=ox=400;
+    var y=oy=300;
+    var swide=800;
+    var shigh=600;
+    var sleft=sdown=0;
+    var tiny=new Array();
+    var star=new Array();
+    var starv=new Array();
+    var starx=new Array();
+    var stary=new Array();
+    var tinyx=new Array();
+    var tinyy=new Array();
+    var tinyv=new Array();
+    
+    window.onload=function() { if (document.getElementById) {
+      var i, rats, rlef, rdow;
+      for (var i=0; i<sparkles; i++) {
+        var rats=createDiv(3, 3);
+        rats.style.visibility="hidden";
+        document.body.appendChild(tiny[i]=rats);
+        starv[i]=0;
+        tinyv[i]=0;
+        var rats=createDiv(5, 5);
+        rats.style.backgroundColor="transparent";
+        rats.style.visibility="hidden";
+        var rlef=createDiv(1, 5);
+        var rdow=createDiv(5, 1);
+        rats.appendChild(rlef);
+        rats.appendChild(rdow);
+        rlef.style.top="2px";
+        rlef.style.left="0px";
+        rdow.style.top="0px";
+        rdow.style.left="2px";
+        document.body.appendChild(star[i]=rats);
+      }
+      set_width();
+      sparkle();
+    }}
+    
+    function sparkle() {
+      var c;
+      if (x!=ox || y!=oy) {
+        ox=x;
+        oy=y;
+        for (c=0; c<sparkles; c++) if (!starv[c]) {
+          star[c].style.left=(starx[c]=x)+"px";
+          star[c].style.top=(stary[c]=y)+"px";
+          star[c].style.clip="rect(0px, 5px, 5px, 0px)";
+          star[c].style.visibility="visible";
+          starv[c]=50;
+          break;
+        }
+      }
+      for (c=0; c<sparkles; c++) {
+        if (starv[c]) update_star(c);
+        if (tinyv[c]) update_tiny(c);
+      }
+      setTimeout("sparkle()", 40);
+    }
+    
+    function update_star(i) {
+      if (--starv[i]==25) star[i].style.clip="rect(1px, 4px, 4px, 1px)";
+      if (starv[i]) {
+        stary[i]+=1+Math.random()*3;
+        if (stary[i]<shigh+sdown) {
+          star[i].style.top=stary[i]+"px";
+          starx[i]+=(i%5-2)/5;
+          star[i].style.left=starx[i]+"px";
+        }
+        else {
+          star[i].style.visibility="hidden";
+          starv[i]=0;
+          return;
+        }
+      }
+      else {
+        tinyv[i]=50;
+        tiny[i].style.top=(tinyy[i]=stary[i])+"px";
+        tiny[i].style.left=(tinyx[i]=starx[i])+"px";
+        tiny[i].style.width="2px";
+        tiny[i].style.height="2px";
+        star[i].style.visibility="hidden";
+        tiny[i].style.visibility="visible"
+      }
+    }
+    
+    function update_tiny(i) {
+      if (--tinyv[i]==25) {
+        tiny[i].style.width="1px";
+        tiny[i].style.height="1px";
+      }
+      if (tinyv[i]) {
+        tinyy[i]+=1+Math.random()*3;
+        if (tinyy[i]<shigh+sdown) {
+          tiny[i].style.top=tinyy[i]+"px";
+          tinyx[i]+=(i%5-2)/5;
+          tiny[i].style.left=tinyx[i]+"px";
+        }
+        else {
+          tiny[i].style.visibility="hidden";
+          tinyv[i]=0;
+          return;
+        }
+      }
+      else tiny[i].style.visibility="hidden";
+    }
+    
+    document.onmousemove=mouse;
+    function mouse(e) {
+      set_scroll();
+      y=(e)?e.pageY:event.y+sdown;
+      x=(e)?e.pageX:event.x+sleft;
+    }
+    
+    function set_scroll() {
+      if (typeof(self.pageYOffset)=="number") {
+        sdown=self.pageYOffset;
+        sleft=self.pageXOffset;
+      }
+      else if (document.body.scrollTop || document.body.scrollLeft) {
+        sdown=document.body.scrollTop;
+        sleft=document.body.scrollLeft;
+      }
+      else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+        sleft=document.documentElement.scrollLeft;
+        sdown=document.documentElement.scrollTop;
+      }
+      else {
+        sdown=0;
+        sleft=0;
+      }
+    }
+    
+    window.onresize=set_width;
+    function set_width() {
+      if (typeof(self.innerWidth)=="number") {
+        swide=self.innerWidth;
+        shigh=self.innerHeight;
+      }
+      else if (document.documentElement && document.documentElement.clientWidth) {
+        swide=document.documentElement.clientWidth;
+        shigh=document.documentElement.clientHeight;
+      }
+      else if (document.body.clientWidth) {
+        swide=document.body.clientWidth;
+        shigh=document.body.clientHeight;
+      }
+    }
+    
+    function createDiv(height, width) {
+      var div=document.createElement("div");
+      div.style.position="absolute";
+      div.style.height=height+"px";
+      div.style.width=width+"px";
+      div.style.overflow="hidden";
+      div.style.backgroundColor=colour;
+      return (div);
+    }
+    // ]]>
+    </script>
+    
+
+  
+ </head>
+
+
+ <body>
+     <header>
+     <h1 class="page-header">Sabrina Navy Chhuoy</h1>
+        <nav class="topnav" id="myTopnav">
+            <a href="index.html" class="active">Home</a>
+            <a href="https://sabrinachhuoy.github.io/stylin-with-css/" target="_blank">Stylin' with CSS</a>
+            <a href="https://github.com/sabrinachhuoy" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/sabrinachhuoy/" target="_blank">LinkedIn</a>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+        </nav>
+     </header>
+     
+   <main class="wrapper">
+        <picture class="profile">
+            <source media="(min-width: 1200px)" srcset="images/sabby.jpg">
+            <source media="(min-width: 501px)" srcset="images/mom.jpg">
+            <img src="images/sab1jpg.jpg"alt="That's me!">
+        </picture>   
+       <h2 class="subheader"><b>Welcome to my portal!</b></h2>
+
+       <p>Here you will find links to projects that  I've worked on.</p>
+       
+       <p>My name is Sabrina and I  am currently a student studying software development with a program called Year  Up. </p>
+       
+       <p>Growing up my family was pretty strict so I stayed home quite a bit. I always played games on our computer and used social media to stay in contact with my friends. Because of being sheltered I also didn't get to explore my hobbies and personal skills and now as a young adult my biggest goal is to try as many things as possible which brings me to the program</p>
+       
+       <p>What I think I'll enjoy the most about learning how to program is the design aspect. There was 2 social media websites that helped me discover this: Myspace and Tumblr. I remember how much fun it was for me to find ways to make my page unique. Its safe to say that  has not changed. </p>
+           
+      <p>Fast forward to high school, I knew I didn't want to attend college. As stated  before I did not get to explore hobbies or talents and this carried on during high school and a few years after I  graduated. I graduated in 2016 and have been working until I was accepted into the program.  </p>
+
+      <p>My first job was at Starbucks and I am grateful to have had this job first to set the tone for my future careers. This job taught me to believe in my skills and to not feel discouraged when  I am not good at something. Something else that I learned was to not let anyone walk all over me because they are  older.  </p>
+       
+      <p>My most recent job is with a company called Cambia Health Solutions where I worked as a Claims Analyst. This job taught me to pay attention to detail and pick up time management/organizational skills. I was hired during covid so I was pretty much remote my entire career here.</p>
+      
+      <p>I have 3 friends that have done the program and they mentioned how great Year Up is and how I should apply. At first I was hesitant because I haven't heard of the program before. What drew me to apply is Year Up's mission; "To  close the opportunity divide by ensuring that young adults gain the skills, experiences, and support that will empower them to reach their potential through careers and higher education"
+
+      
+      I resonate with this mission because I want to be apart of the movement to close the opportunity divide. For the 6 years that I worked I really felt like there was no  spot for me but there's a spot for everyone to gain these skills.  I want to see more diverse groups of people because we too are intelligent and Year Up gives us a chance to build on that.</p>
+      
+     
+      
+      
+      <h3>Page Origin</h3>
+
+       <p>The HTML/CSS comes from Sara Newman's Web Fundamentals class as taught at Seattle Central. This page provides a basis for students to build a responsive portal page.</p>
+       
+
+
+    <p>Study how this page is built, with the <a href="https://www.youtube.com/watch?v=151NXMk0a2c" target="_blank">DOM Inspector</a> and use it as a foundation for your portal or other sites!</p>
+     <footer>
+      <p><small>&copy; 2021-<span id="this-year"></span> by 
+          Sabrina Navy Chhuoy, All Rights Reserved ~ 
+          <a id="html-checker" href="#" target="_blank">Check HTML</a> ~ 
+          <a id="css-checker" href="#" target="_blank">Check CSS</a></small>
+     </p>
+    </footer>
+  </main>
+     
+  <!-- Toggle between adding and removing the "responsive" class to topnav when the user clicks on the icon -->
+    <script>
+    //https://tinyurl.com/dynamic-html-checker
+    document.getElementById("html-checker").setAttribute("href","https://validator.w3.org/nu/?doc=" + location.href);
+      
+    document.getElementById("css-checker").setAttribute("href","https://jigsaw.w3.org/css-validator/validator?uri=" + location.href); 
+     
+     //set current year in span with id of this-year
+     let d = new Date(); let thisYear = d.getFullYear();
+     document.getElementById("this-year").innerHTML = thisYear;
+    
+    //manages mobile nav 
+    function myFunction() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }   
+ </script>
+     
+ </body>
+</html>

@@ -1,0 +1,122 @@
+/* Global rules */
+
+@import url('https://fonts.googleapis.com/css?family=Abrielfatface');
+
+html {
+    background-image: url("../images/vivid.jpeg");
+    background-repeat:round;
+    background-size: 1400px 900px;
+ }
+ 
+
+::selection {
+    color: rgb(255, 214, 250); 
+    background: rgb(255, 115, 211);
+}
+
+h1 {
+    font-weight: normal;
+    margin: auto;
+    background: rgba(252, 252, 252, 0);
+    line-height: 2.5em;
+}
+/* Adds google font to H1 for main pages */
+h1.page-header{
+        font-family: 'Abril Fatface', 'Times New Roman', Times, serif; 
+}
+
+main.wrapper {
+    background-color: rgba(255, 255, 255, 0.545);
+    overflow: auto;
+    border-width: 1.5px;
+    border-style:solid;
+    border-color: rgb(4, 0, 13);
+}
+
+
+p {
+    margin: 1em; /* Top Right Bottom Left (TRBL) */
+}
+
+h2,h3 {
+    font-weight: normal;
+    margin-left: 1em;
+    line-height: 1em;
+}
+
+a {
+    color:rgba(245, 12, 105, 0.801);
+    text-decoration: none;
+}
+
+a:hover {
+    color: rgba(236, 26, 121, 0.403);
+    background-color: rgba(255, 199, 254, 0.861);
+    text-decoration: none;
+}
+
+footer {
+    clear: both;
+    text-align: center;
+    padding: 1em;
+}
+
+/* Responsive rules */
+
+/* DESKTOP */
+@media all and (min-width:1200px) {
+    main.wrapper {
+        width: 80%;
+        margin: auto;
+    }
+    
+    h1 {
+        width: 79%;
+        padding-left: 1%;
+    }
+    
+    picture.profile img {
+        width: 20%;
+        float: left;
+        margin-right: 2em;
+        
+    }
+    
+}
+
+/* TABLET */
+@media all and (min-width:501px) and (max-width:1199px) {
+    main.wrapper {
+        width: 90%;
+        margin: auto;
+    }
+    
+    h1 {
+        width: 89%;
+        padding-left: 1%;
+    }
+    
+    picture.profile img {
+        width: 50%;
+        float: right;
+        margin-left: 1em;
+    }
+
+}
+
+/* PHONE */
+@media all and (max-width:500px) {
+    main.wrapper {
+        width: 100%;
+    }
+    
+    h1 {
+        width: 99%;
+        padding-left: 1%;
+    }
+    
+    picture.profile img {
+        width: 100%;
+    }
+    
+}
