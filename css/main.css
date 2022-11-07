@@ -74,7 +74,7 @@ footer {
 /* DESKTOP */
 @media all and (min-width:501px) {
     main.wrapper {
-        width: 50%;
+        width: 70%;
         margin: auto;
     }
     
@@ -84,7 +84,7 @@ footer {
     }
     
     picture.profile img {
-        width: 50%;
+        width: 20%;
         float: left;
         margin-right: 2em;
         
